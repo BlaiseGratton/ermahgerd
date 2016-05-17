@@ -1,5 +1,5 @@
 import unittest
-from ermahgerd import ermahgerd
+from ermahgerd import ermahgerd, process_syllable
 
 
 class TestErmahgerdOutput(unittest.TestCase):
@@ -22,6 +22,25 @@ class TestErmahgerdOutput(unittest.TestCase):
 
     def test_5(self):
         self.assertEqual("lertter", ermahgerd("little"))
+
+    def test_6(self):
+        self.assertEqual("fersberk", ermahgerd("facebook"))
+
+
+class TestProcessSyllable(unittest.TestCase):
+
+    def test_1(self):
+        self.assertEqual("ert", process_syllable("it"))
+
+    def test_2(self):
+        self.assertEqual("ers", process_syllable("ace"))
+
+    def test_3(self):
+        self.assertEqual("ern", process_syllable("one"))
+
+    def test_4(self):
+        self.assertEqual("ert", process_syllable("ate"))
+
 
 if __name__ == '__main__':
     unittest.main()
