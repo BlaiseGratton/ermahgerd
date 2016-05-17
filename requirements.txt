@@ -1,0 +1,2 @@
+hyphenator==0.5.1
+wheel==0.24.0
