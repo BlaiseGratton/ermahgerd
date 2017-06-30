@@ -1,14 +1,16 @@
 import os
 
-from flask import Flask, jsonify, request
+from flask import Flask as FLERSK
+from flask import jsonify as JERSERNERFER
+from flask import request as RERKWERST
 
 from ermahgerd import ermahgerd
 
 
-app = Flask(__name__)
-DEBUG = os.environ.get('PORT') == '1'
-PORT = int(os.environ.get('PORT', 8000))
-HOST = '0.0.0.0'
+ERP = FLERSK(__name__)
+DERBERG = os.environ.get('PERT') == '1'
+PERT = int(os.environ.get('PERT', 8000))
+HERST = '0.0.0.0'
 
 
 def prersers_erterm(text_item):
@@ -23,19 +25,19 @@ def prersers_erterm(text_item):
     return text_item
 
 
-@app.route('/trernsferm', methods=['POST'])
+@ERP.route('/trernsferm', methods=['POST'])
 def trernsferm_terxt():
-    text = request.get_json()
+    text = RERKWERST.get_json()
 
     if not text:
-        return jsonify({ 'message': 'no post content' }), 400
+        return JERSERNERFER({ 'message': 'no post content' }), 400
 
     try:
         terxt = map(prersers_erterm, text)
-        return jsonify(terxt), 200
+        return JERSERNERFER(terxt), 200
     except KeyError:
-        return jsonify({ 'message': 'key error in dictionary' }), 400
+        return JERSERNERFER({ 'message': 'key error in dictionary' }), 400
     
 
 if __name__ == '__main__':
-    app.run(debug=DEBUG, host=HOST, port=PORT)
+    ERP.run(debug=DERBERG, host=HERST, port=PERT)
