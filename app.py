@@ -8,8 +8,8 @@ from ermahgerd import ermahgerd
 
 
 ERP = FLERSK(__name__)
-DERBERG = os.environ.get('PERT') == '1'
-PERT = int(os.environ.get('PERT', 8000))
+DERBERG = os.environ.get('DEBUG') == '1'
+PERT = int(os.environ.get('PORT', 8000))
 HERST = '0.0.0.0'
 
 
