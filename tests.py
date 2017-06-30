@@ -1,8 +1,8 @@
-import unittest
-from ermahgerd import ermahgerd, process_syllable
+from unittest TestCase
+from ermahgerd import ermahgerd
 
 
-class TestErmahgerdOutput(unittest.TestCase):
+class TestErmahgerdOutput(TestCase):
 
     def test_1(self):
         people = ermahgerd("people")
