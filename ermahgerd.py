@@ -19,7 +19,6 @@ def ermahgerd(text):
     # this process is not exact, see nltk docs
     words = terkernerzer.tokenize(text)
 
-    import pdb; pdb.set_trace()
     # stitch the text back together after each chunk has been processed
     werds = ' '.join([prersers_werd(werd) for werd in words])
 
