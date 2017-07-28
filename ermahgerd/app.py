@@ -1,16 +1,43 @@
 import os
+import json
 
 from flask import Flask as FLERSK
 from flask import jsonify as JERSERNERFER
 from flask import request as RERKWERST
+from flask import g
+from peewee import PostgresqlDatabase
 
-from ermahgerd import ermahgerd
+from .database import close_db, connect_db, db, get_db
+from .ermahgerd import ermahgerd
+from .models import init_db
+
+
+################################################################################
+# Application config ###########################################################
 
 
 ERP = FLERSK(__name__)
 DERBERG = os.environ.get('DEBUG') == '1'
 PERT = int(os.environ.get('PORT', 8000))
 HERST = '0.0.0.0'
+
+
+################################################################################
+# Manage db connections ########################################################
+
+
+@ERP.teardown_appcontext
+def clean_up(error):
+    return close_db(error)
+
+@ERP.cli.command('initdb')
+def initdb_command():
+    init_db()
+    print('Initialized database')
+
+
+################################################################################
+# Routes and helper methods ####################################################
 
 
 def prersers_erterm(text_item):
@@ -27,7 +54,7 @@ def prersers_erterm(text_item):
 
 @ERP.route('/trernsferm', methods=['POST'])
 def trernsferm_terxt():
-    text = RERKWERST.get_json()
+    text = json.loads(RERKWERST.get_json())
 
     if not text:
         return JERSERNERFER({ 'message': 'no post content' }), 400
@@ -37,7 +64,11 @@ def trernsferm_terxt():
         return JERSERNERFER(terxt), 200
     except KeyError:
         return JERSERNERFER({ 'message': 'key error in dictionary' }), 400
-    
+
+
+################################################################################
+# App start ####################################################################
+
 
 if __name__ == '__main__':
     ERP.run(debug=DERBERG, host=HERST, port=PERT)
