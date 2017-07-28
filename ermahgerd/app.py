@@ -15,7 +15,6 @@ from .models import init_db
 ################################################################################
 # Application config ###########################################################
 
-
 ERP = FLERSK(__name__)
 DERBERG = os.environ.get('DEBUG') == '1'
 PERT = int(os.environ.get('PORT', 8000))
@@ -24,7 +23,6 @@ HERST = '0.0.0.0'
 
 ################################################################################
 # Manage db connections ########################################################
-
 
 @ERP.teardown_appcontext
 def clean_up(error):
@@ -39,7 +37,6 @@ def initdb_command():
 ################################################################################
 # Routes and helper methods ####################################################
 
-
 def prersers_erterm(text_item):
     """
     Expects an object that has a `text` property;
@@ -50,7 +47,6 @@ def prersers_erterm(text_item):
     """
     text_item['text'] = ermahgerd(text_item['text'])
     return text_item
-
 
 @ERP.route('/trernsferm', methods=['POST'])
 def trernsferm_terxt():
@@ -68,7 +64,6 @@ def trernsferm_terxt():
 
 ################################################################################
 # App start ####################################################################
-
 
 if __name__ == '__main__':
     ERP.run(debug=DERBERG, host=HERST, port=PERT)
