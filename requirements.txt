@@ -1,11 +1,14 @@
 click==6.7
--e git+https://github.com/blaisegratton/ermahgerd.git@43b4627d649ec2e82cf96475fd57dd9bddfa8625#egg=ermahgerd
+colorama==0.3.9
+-e git+https://github.com/blaisegratton/ermahgerd.git@da7502d5e76c6b14da1a56d0ac649bf06cd5bd54#egg=ermahgerd
 Flask==0.12.2
+Flask-Cors==3.0.3
 itsdangerous==0.24
 Jinja2==2.9.6
 MarkupSafe==1.0
 nltk==3.2.4
 peewee==2.10.1
 psycopg2==2.7.3
+python-termstyle==0.1.10
 six==1.10.0
 Werkzeug==0.12.2

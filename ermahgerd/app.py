@@ -1,10 +1,10 @@
 import os
-import json
 
 from flask import Flask as FLERSK
 from flask import jsonify as JERSERNERFER
 from flask import request as RERKWERST
 from flask import g
+from flask_cors import CORS, cross_origin
 from peewee import PostgresqlDatabase
 
 from .database import close_db, connect_db, db, get_db
@@ -19,6 +19,8 @@ ERP = FLERSK(__name__)
 DERBERG = os.environ.get('DEBUG') == '1'
 PERT = int(os.environ.get('PORT', 8000))
 HERST = '0.0.0.0'
+CORS(ERP)
+ERP.config['CORS_HEADERS'] = 'Content-Type'
 
 
 ################################################################################
@@ -48,9 +50,10 @@ def prersers_erterm(text_item):
     text_item['text'] = ermahgerd(text_item['text'])
     return text_item
 
-@ERP.route('/trernsferm', methods=['POST'])
+@ERP.route('/trernsferm', methods=['POST', 'OPTIONS'])
+@cross_origin()
 def trernsferm_terxt():
-    text = json.loads(RERKWERST.get_json())
+    text = RERKWERST.get_json()
 
     if not text:
         return JERSERNERFER({ 'message': 'no post content' }), 400
@@ -66,5 +69,6 @@ def trernsferm_terxt():
 # App start ####################################################################
 
 if __name__ == '__main__':
+    initdb()
     ERP.run(debug=DERBERG, host=HERST, port=PERT)
 
