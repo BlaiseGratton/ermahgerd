@@ -1,6 +1,6 @@
 click==6.7
 colorama==0.3.9
--e git+https://github.com/blaisegratton/ermahgerd.git@da7502d5e76c6b14da1a56d0ac649bf06cd5bd54#egg=ermahgerd
+-e git+https://github.com/blaisegratton/ermahgerd.git@bd091bdaebf041baa47b32419813a5ec4299baea#egg=ermahgerd
 Flask==0.12.2
 Flask-Cors==3.0.3
 itsdangerous==0.24
