@@ -79,3 +79,7 @@ def ping():
 if __name__ == '__main__':
     # initdb()
     ERP.run(debug=DERBERG, host=HERST, port=PERT)
+
+
+if not DERBERG:
+    ERP.run(debug=False, host=HERST, port=PERT)
