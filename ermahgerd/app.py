@@ -12,8 +12,8 @@ from .ermahgerd import ermahgerd
 from .models import init_db
 
 
-################################################################################
-# Application config ###########################################################
+###############################################################################
+# Application config ##########################################################
 
 ERP = FLERSK(__name__)
 DERBERG = os.environ.get('DEBUG') == '1'
@@ -23,12 +23,13 @@ CORS(ERP)
 ERP.config['CORS_HEADERS'] = 'Content-Type'
 
 
-################################################################################
-# Manage db connections ########################################################
+###############################################################################
+# Manage db connections #######################################################
 
 @ERP.teardown_appcontext
 def clean_up(error):
     return close_db(error)
+
 
 @ERP.cli.command('initdb')
 def initdb_command():
@@ -36,13 +37,13 @@ def initdb_command():
     print('Initialized database')
 
 
-################################################################################
-# Routes and helper methods ####################################################
+###############################################################################
+# Routes and helper methods ###################################################
 
 def prersers_erterm(text_item):
     """
     Expects an object that has a `text` property;
-    if you are reinserting this into a document, etc., you may want to 
+    if you are reinserting this into a document, etc., you may want to
     have another property which somehow identifies where the text came
     from... this method simply returns that object untouched other than
     the `text` property
@@ -50,25 +51,31 @@ def prersers_erterm(text_item):
     text_item['text'] = ermahgerd(text_item['text'])
     return text_item
 
+
 @ERP.route('/trernsferm', methods=['POST', 'OPTIONS'])
 @cross_origin()
 def trernsferm_terxt():
     text = RERKWERST.get_json()
 
     if not text:
-        return JERSERNERFER({ 'message': 'no post content' }), 400
+        return JERSERNERFER({'message': 'no post content'}), 400
 
     try:
         terxt = map(prersers_erterm, text)
         return JERSERNERFER(terxt), 200
     except KeyError:
-        return JERSERNERFER({ 'message': 'key error in dictionary' }), 400
+        return JERSERNERFER({'message': 'key error in dictionary'}), 400
 
 
-################################################################################
-# App start ####################################################################
+@ERP.route('/')
+@cross_origin
+def ping():
+    return 200
+
+
+###############################################################################
+# App start ###################################################################
 
 if __name__ == '__main__':
-    initdb()
+    # initdb()
     ERP.run(debug=DERBERG, host=HERST, port=PERT)
-
