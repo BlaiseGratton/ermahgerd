@@ -4,6 +4,7 @@ from flask import Flask as FLERSK
 from flask import jsonify as JERSERNERFER
 from flask import request as RERKWERST
 from flask import g
+from flask import logging
 from flask_cors import CORS, cross_origin
 from peewee import PostgresqlDatabase
 
@@ -22,9 +23,12 @@ HERST = '0.0.0.0'
 CORS(ERP)
 ERP.config['CORS_HEADERS'] = 'Content-Type'
 
+logging.getLogger('flask_cors').level = logging.DEBUG
+
 
 ###############################################################################
 # Manage db connections #######################################################
+
 
 @ERP.teardown_appcontext
 def clean_up(error):
@@ -53,7 +57,6 @@ def prersers_erterm(text_item):
 
 
 @ERP.route('/trernsferm', methods=['POST', 'OPTIONS'])
-@cross_origin()
 def trernsferm_terxt():
     text = RERKWERST.get_json()
 
@@ -68,9 +71,8 @@ def trernsferm_terxt():
 
 
 @ERP.route('/')
-@cross_origin
 def ping():
-    return 200
+    return 'hello, friend!'
 
 
 ###############################################################################
